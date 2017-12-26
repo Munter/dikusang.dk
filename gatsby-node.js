@@ -6,22 +6,15 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators;
 
   if (node.internal.type === 'SongsJson') {
-    const year = Number((String(node.revueyear) || String(node.year)).replace(/[^\d]/g, ''));
+    const slug = `${node.year}/${path.basename(node.location, path.extname(node.location))}`;
+    // const slug = `${year}/${slugify(node.title)}`;
+    console.log(slug);
 
-    if (!year) {
-      console.log('FAIL!!!!!!');
-      console.log(node);
-    } else {
-      const slug = `${year}/${path.basename(node.location, path.extname(node.location))}`;
-      // const slug = `${year}/${slugify(node.title)}`;
-      console.log(slug);
-
-      createNodeField({
-        node,
-        name: `slug`,
-        value: slug,
-      });
-    }
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    });
   }
 }
 

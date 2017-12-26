@@ -6,7 +6,7 @@ export default ({data}) => {
   return (
     <main>
       <ul>
-        { songs.map(song => <li><a href={song.fields.slug}>{song.revueyear} - {song.title}</a></li>) }
+        { songs.map(song => <li><a href={song.fields.slug}>{song.revueyear} - {song.title} - {song.melody}</a></li>) }
       </ul>
     </main>
   );
@@ -22,6 +22,7 @@ query songs {
         revueyear,
         title,
         melody
+        composer
         author
 
         fields {
@@ -38,11 +39,6 @@ query songs {
           actor
           abbr
           title
-        }
-
-        vdom {
-          component,
-          children
         }
 
       }

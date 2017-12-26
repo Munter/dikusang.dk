@@ -2,18 +2,19 @@ import React from 'react';
 
 const Song = ({ data }) => {
   const song = data.songsJson;
-  const year = Number((String(song.revueyear) || String(song.year)).replace(/[^\d]/g, ''));
 
   return (
     <main>
       <header>
-        <p>{ song.revuename } { year }</p>
+        <p>{ song.revuename } { song.year }</p>
         <h1>{ song.title }</h1>
-
-        <pre>
-          { song.vdom.children[0] }
-        </pre>
+        <p>Forfatter: { song.author }</p>
+        <p>Originalmelodi: { song.melody } ({ song.composer })</p>
       </header>
+
+      <pre>
+        { song.content }
+      </pre>
     </main>
   );
 };
@@ -29,9 +30,10 @@ export const query = graphql`
       revuename
       year
 
-      vdom {
-        children
-      }
+      melody
+      composer
+
+      content
     }
   }
 `;
