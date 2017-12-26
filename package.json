@@ -7,6 +7,7 @@
     "lint": "eslint src scripts",
     "data": "node scripts/data.js > src/songs.json",
     "develop": "gatsby develop",
+    "prebuild": "git submodule update --init && npm run data",
     "build": "gatsby build",
     "serve": "gatsby serve"
   },
