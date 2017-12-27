@@ -1,4 +1,5 @@
-import React from "react"
+import React from 'react';
+import Link from 'gatsby-link';
 
 export default ({data}) => {
   const songs = data.allSongsJson.edges.map(e => e.node);
@@ -6,7 +7,7 @@ export default ({data}) => {
   return (
     <main>
       <ul>
-        { songs.map(song => <li><a href={song.fields.slug}>{song.revueyear} - {song.title} - {song.melody}</a></li>) }
+        { songs.map(song => <li><Link to={song.fields.slug}>{song.revueyear} - {song.title} - {song.melody}</Link></li>) }
       </ul>
     </main>
   );
