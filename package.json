@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint src scripts",
-    "data": "node scripts/data.js > src/songs.json",
+    "data": "node scripts/createDataset.js > functions/gql/data.json",
     "develop": "gatsby develop",
     "prebuild": "git submodule update --init && npm run data",
     "build": "gatsby build",
