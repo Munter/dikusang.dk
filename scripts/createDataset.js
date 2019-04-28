@@ -95,7 +95,7 @@ function getCleanId(id) {
 
   const persons = {};
   const allMaterials = {};
-  const seasons = {};
+  const productions = {};
 
   function getPerson(id) {
     if (!id) {
@@ -164,13 +164,18 @@ function getCleanId(id) {
           melody,
           composer,
           length,
+          revueyear,
           ...material
         } = m;
 
         const materialData = {
           ...material,
           id: `${name}-${year}-${location}`,
+          revuename: name,
+          revueyear: year,
+          production: yearData.id,
           length: parseFloat(length),
+          authoringyear: revueyear,
           texLocation: `${year}/${location}`,
           pdfLocation: `${year}/${location.replace(/\.tex$/, ".pdf")}`,
           melody,
@@ -246,11 +251,11 @@ function getCleanId(id) {
       yearData.minutes += parseFloat(minutes);
     }
 
-    seasons[yearData.id] = yearData;
+    productions[yearData.id] = yearData;
   }
 
   const data = {
-    seasons,
+    productions,
     materials: allMaterials,
     persons
   };
