@@ -1,5 +1,6 @@
 # auto generated files
-src/songs.json
+functions/gql/data.json
+.netlify
 
 # Logs
 logs
