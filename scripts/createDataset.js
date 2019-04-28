@@ -148,10 +148,11 @@ function getCleanId(id) {
       id: `${name}-${year}`,
       year,
       name,
+      minutes: 0,
       acts: []
     };
 
-    for (const { materials, ...actData } of acts) {
+    for (const { materials, length: minutes, ...actData } of acts) {
       const materialsReferences = [];
 
       for (const m of materials) {
@@ -162,12 +163,14 @@ function getCleanId(id) {
           instructors = [],
           melody,
           composer,
+          length,
           ...material
         } = m;
 
         const materialData = {
-          id: `${name}-${year}-${location}`,
           ...material,
+          id: `${name}-${year}-${location}`,
+          length: parseFloat(length),
           texLocation: `${year}/${location}`,
           pdfLocation: `${year}/${location.replace(/\.tex$/, ".pdf")}`,
           melody,
@@ -237,8 +240,10 @@ function getCleanId(id) {
 
       yearData.acts.push({
         ...actData,
+        minutes,
         materials: materialsReferences
       });
+      yearData.minutes += parseFloat(minutes);
     }
 
     seasons[yearData.id] = yearData;

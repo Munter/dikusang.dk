@@ -1,6 +1,6 @@
 const { gql } = require("apollo-server-lambda");
 
-exports.schema = gql`
+exports.typeDefs = gql`
   type Material {
     id: ID
     type: String
@@ -9,7 +9,14 @@ exports.schema = gql`
     instructors: [Person]
     props: [Prop]
     revueyear: String
+    revuename: String
     title: String
+    length: Float
+    order: Int
+    status: String
+    version: String
+    texLocation: String
+    pdfLocation: String
   }
 
   type Prop {
@@ -30,6 +37,15 @@ exports.schema = gql`
     id: ID
     name: String
     year: Int
+    acts: [Act]
+    minutes: Float
+  }
+
+  type Act {
+    title: String
+    length: Float
+    order: Int
+    materials: [Material]
   }
 
   type Person {
@@ -41,7 +57,7 @@ exports.schema = gql`
 
   type Query {
     productions: [Production]
-    materials: [Material]
+    materials(type: String): [Material]
     persons: [Person]
 
     production(id: ID!): Production

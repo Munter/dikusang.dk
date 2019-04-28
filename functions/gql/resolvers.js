@@ -5,8 +5,9 @@ exports.resolvers = {
     productions: () => Object.values(seasons),
     persons: () => Object.values(persons),
     materials: (parent, args, context, info) => {
-      console.log({ parent, args, context, info });
-      return Object.values(materials);
+      const { type } = args;
+
+      return Object.values(materials).filter(m => m.type === type);
     },
 
     production: (parent, args, context, info) => seasons[args.id],
@@ -27,6 +28,12 @@ exports.resolvers = {
         actor: persons[role.actor],
         material: materials[role.material]
       }));
+    }
+  },
+
+  Act: {
+    materials: parent => {
+      return parent.materials.map(m => materials[m]);
     }
   },
 
