@@ -1,8 +1,8 @@
-const { seasons, persons, materials } = require("./data.json");
+const { productions, persons, materials } = require("./data.json");
 
 exports.resolvers = {
   Query: {
-    productions: () => Object.values(seasons),
+    productions: () => Object.values(productions),
     persons: () => Object.values(persons),
     materials: (parent, args, context, info) => {
       const { type } = args;
@@ -10,18 +10,22 @@ exports.resolvers = {
       return Object.values(materials).filter(m => m.type === type);
     },
 
-    production: (parent, args, context, info) => seasons[args.id],
+    production: (parent, args, context, info) => productions[args.id],
     person: (parent, args, context, info) => persons[args.id],
     material: (parent, args, context, info) => materials[args.id]
   },
 
   Material: {
+    production: parent => productions[parent.production],
+
     authors: parent => {
       return parent.authors.map(a => persons[a]);
     },
+
     instructors: parent => {
       return parent.instructors.map(i => persons[i]);
     },
+
     roles: parent => {
       return parent.roles.map(role => ({
         ...role,

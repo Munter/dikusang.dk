@@ -4,6 +4,7 @@ exports.typeDefs = gql`
   type Material {
     id: ID
     type: String
+    production: Production
     roles: [Role]
     authors: [Person]
     instructors: [Person]
